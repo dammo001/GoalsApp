@@ -57,4 +57,20 @@ RSpec.configure do |config|
     click_button "Sign In"
   end
 
+  def logout_user
+    login_user
+    click_button "Sign Out"
+  end
+
+  def create_goal
+    click_link "Create a New Goal"
+    fill_in "What's your goal?", with: "goal stuff"
+    choose('Public')
+    choose('not completed')
+    click_button "Create New Goal"
+  end
+  
+
+
+
 end

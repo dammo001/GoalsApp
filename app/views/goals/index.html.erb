@@ -1,0 +1,14 @@
+<h1>Goals List<h1>
+<ul>
+  <% @goals.each do |goal|  %>
+
+    <% if goal.sharing == "Private" && goal.user == current_user %>
+      <li>  <%= link_to "#{goal.body}", goal_url(goal) %> </li>
+    <% elsif goal.sharing == "Public" %>
+      <li> <%= link_to "#{goal.body}", goal_url(goal) %> </li>
+    <% end %>
+  <% end %>
+</ul><br> 
+
+
+<%= link_to "Create a New Goal", new_goal_url %>

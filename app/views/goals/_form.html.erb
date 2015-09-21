@@ -1,0 +1,39 @@
+<% action = @goal.persisted? ? goal_url(@goal) : goals_url %>
+<% method = @goal.persisted? ? "PATCH" : "POST" %>
+<% submit = @goal.persisted? ? "Update Goal" : "Create New Goal" %>
+
+<form action="<%= action %>" method="POST">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="<%= method %>">
+
+  <label>What's your goal?
+  <textarea name="goal[body]"><%=@goal.body %></textarea>
+  </label>
+  <br>
+
+  <label>Sharing Status
+  <% Goal::SHARING.each do |sharing| %>
+    <label><%= sharing %>
+    <input type="radio"
+           name="goal[sharing]"
+           value="<%= sharing %>"
+           <%= "checked".html_safe if @goal.sharing == sharing %>
+    ></label>
+  <% end %>
+  </label>
+  <br>
+
+  <label>Goal Status
+  <% Goal::STATUS.each do |status| %>
+  <label><%= status %>
+    <input type="radio"
+           name="goal[status]"
+           value="<%= status %>"
+           <%= "checked".html_safe if @goal.status == status %>
+    ></label>
+  <% end %>
+  </label>
+  <br>
+
+  <input type="submit" value="<%= submit %>">
+</form>
