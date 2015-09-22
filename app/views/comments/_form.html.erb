@@ -1,0 +1,12 @@
+<form action="<%= comments_url %>" method="POST">
+  <%= auth_token %>
+  <input type="hidden" name="comment[commentable_id]" value="<%= commentable.id %>">
+  <input type="hidden" name="comment[commentable_type]" value="<%= commentable.class %>">
+
+  <label>Add Comment
+  <textarea name="comment[body]"><%=@comment.body %></textarea>
+  </label>
+  <br>
+
+  <input type="submit" value="Add Comment">
+</form>

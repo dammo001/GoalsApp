@@ -12,16 +12,22 @@
 #
 
 class Goal < ActiveRecord::Base
-  validates :body, :user_id, :status, :sharing, presence: true
+  include Commentable
+
   STATUS = ["not completed", "completed"]
   SHARING = ["Public", "Private"]
+
+  validates :body, :user_id, :status, :sharing, presence: true
   validates :status, inclusion: STATUS
   validates :sharing, inclusion: SHARING
+  before_validation :ensure_status_is_set
+
   belongs_to :user
 
 
 
-
-
-
+  private
+  def ensure_status_is_set
+    self.status ||= "not completed"
+  end
 end

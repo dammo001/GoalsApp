@@ -5,3 +5,12 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+50.times {  User.create!(username: Faker::Name.name, password: "123456") }
+
+users = User.all
+50.times do
+  user = users.sample
+  user.goals.create!(body: Faker::Company.bs, sharing: ["Public", "Private"].sample)
+end
